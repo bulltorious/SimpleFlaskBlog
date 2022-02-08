@@ -20,7 +20,7 @@ def index():
     posts = Post.query.all()
 
     for post in posts:
-        post.text = bleach.clean(post.text,tags=['a', 'abbr', 'acronym', 'b', 'blockquote', 'code', 'em', 'i', 'li', 'ol', 'strong', 'ul','div','u','br', 'table', 'tr', 'tbody', 'td'])
+        post.text = bleach.clean(post.text,tags=['a', 'abbr', 'acronym', 'b', 'blockquote', 'code', 'em', 'i', 'li', 'ol', 'strong', 'ul','div','u','br', 'table', 'tr', 'tbody', 'td','h1','h2','h3','h4','h5'],styles=bleach.sanitizer.ALLOWED_STYLES)
 
     return render_template("home.html", user=current_user, posts=posts)
 
@@ -72,7 +72,7 @@ def posts(username):
     posts = user.posts
 
     for post in posts:
-        post.text = bleach.clean(post.text,tags=['a', 'abbr', 'acronym', 'b', 'blockquote', 'code', 'em', 'i', 'li', 'ol', 'strong', 'ul','div','u','br', 'table', 'tr', 'tbody', 'td'])
+        post.text = bleach.clean(post.text,tags=['a', 'abbr', 'acronym', 'b', 'blockquote', 'code', 'em', 'i', 'li', 'ol', 'strong', 'ul','div','u','br', 'table', 'tr', 'tbody', 'td','h1','h2','h3','h4','h5'],styles=bleach.sanitizer.ALLOWED_STYLES)
     
     return render_template("posts.html", user=current_user, posts=posts, username=username)
 
@@ -81,7 +81,7 @@ def posts(username):
 @login_required
 def create_comment(post_id):
     text = request.form.get('text')
-    text = bleach.clean(text,tags=['a', 'abbr', 'acronym', 'b', 'blockquote', 'code', 'em', 'i', 'li', 'ol', 'strong', 'ul','div','u','br', 'table', 'tr', 'tbody', 'td'])
+    text = bleach.clean(text,tags=['a', 'abbr', 'acronym', 'b', 'blockquote', 'code', 'em', 'i', 'li', 'ol', 'strong', 'ul','div','u','br', 'table', 'tr', 'tbody', 'td','h1','h2','h3','h4','h5'],styles=bleach.sanitizer.ALLOWED_STYLES)
     if not text:
         flash('Comment cannot be empty.', category='error')
     else:
