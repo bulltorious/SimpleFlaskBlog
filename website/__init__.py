@@ -3,7 +3,6 @@ from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask_login import LoginManager
 import os
-import psycopg2
 
 db = SQLAlchemy()
 DB_NAME = "database.db"
