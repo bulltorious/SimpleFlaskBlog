@@ -17,3 +17,4 @@ webencodings==0.5.1
 Werkzeug==2.0.2
 wincertstore==0.2
 gunicorn
+psycopg==2.8.6
