@@ -11,7 +11,13 @@ DB_NAME = "database.db"
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = "helloworld"
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+    app.config['SQLALCHEMY_DATABASE_URI']
+
+    if os.environ['DATABASE_URL'] and os.environ['DATABASE_URL'].startswith("postgres://"):
+        app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL'].replace("postgres://", "postgresql://", 1)
+    else: 
+        app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+
     db.init_app(app)
 
     from .views import views
